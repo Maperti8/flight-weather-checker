@@ -5,11 +5,19 @@
       <mat-checkbox formControlName="TAF" color="primary">TAF</mat-checkbox>
     </div>
   
+    <!-- Options from the new airpot array -->
     <mat-form-field appearance="fill" class="new-dropdown">
       <mat-label>Select Options</mat-label>
       <mat-select formControlName="selectedOptions" multiple>
-        <!-- Options from the new array -->
-        <mat-option *ngFor="let option of newOptions" [value]="option">{{ option }}</mat-option>
+        <mat-option *ngFor="let airport of airports" [value]="airport">{{ airport }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Options from the new country array -->
+    <mat-form-field appearance="fill" class="new-dropdown">
+      <mat-label>Select Options</mat-label>
+      <mat-select formControlName="selectedOptions" multiple>
+        <mat-option *ngFor="let country of countries" [value]="country">{{ country }}</mat-option>
       </mat-select>
     </mat-form-field>
   

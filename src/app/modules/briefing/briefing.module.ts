@@ -3,10 +3,13 @@ import { CommonModule } from '@angular/common';
 // components
 import { FormComponent } from './components/form/form.component';
 import { TableComponent } from './components/table/table.component';
+// services
+import { OpmetService } from './services/opmet.service';
 // material
 import { MaterialModule } from '../material/material-module';
 // routing 
 import { BriefingRoutingModule } from './briefing-routing';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -19,6 +22,10 @@ import { BriefingRoutingModule } from './briefing-routing';
     CommonModule,
     BriefingRoutingModule,
     MaterialModule,
-  ]
+    HttpClientModule,
+  ],
+  providers: [
+    OpmetService,
+  ],
 })
 export class BriefingModule { }

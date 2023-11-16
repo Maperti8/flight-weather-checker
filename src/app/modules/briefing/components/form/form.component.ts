@@ -7,8 +7,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
+  airports: string[] = ['LZIB', 'LKPR'];
+  countries: string[] = ['KZ', 'EG', 'CZ'];
   reportTypes: string[] = ['METAR', 'TAF', 'SIGMET'];
-  newOptions: string[] = ['Option1', 'Option2', 'Option3']; // New array for the dropdown options
   briefingForm!: FormGroup;
 
   constructor(private fb: FormBuilder) {}
@@ -18,7 +19,7 @@ export class FormComponent implements OnInit {
       METAR: false,
       SIGMET: false,
       TAF: false,
-      selectedOptions: [] // New FormControl for the multiple select dropdown
+      selectedOptions: []   
     });
   }
 
