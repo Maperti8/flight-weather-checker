@@ -1,3 +1,15 @@
-<h1>header</h1>
-<router-outlet></router-outlet>
-<h1>footer</h1>
+<div fxLayout="column" style="min-height: 100vh; position: relative;">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span>Reactive form</span>
+        <span class="example-spacer"></span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  
+    <router-outlet></router-outlet>
+  
+    <footer id="footer" fxLayout="column" fxLayoutAlign="center center">
+      <p style="margin: 0;">2023 Martin Pekny</p>
+      <a href="https://github.com/Maperti8" target="_blank">GitHub</a>
+    </footer>
+</div>

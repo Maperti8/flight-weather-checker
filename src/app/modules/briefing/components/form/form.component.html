@@ -1,1 +1,18 @@
-<p>form works!</p>
+<form [formGroup]="briefingForm" (ngSubmit)="generateBriefing()">
+    <div class="checkbox-row">
+      <mat-checkbox formControlName="METAR" color="primary">METAR</mat-checkbox>
+      <mat-checkbox formControlName="SIGMET" color="primary">SIGMET</mat-checkbox>
+      <mat-checkbox formControlName="TAF" color="primary">TAF</mat-checkbox>
+    </div>
+  
+    <mat-form-field appearance="fill" class="new-dropdown">
+      <mat-label>Select Options</mat-label>
+      <mat-select formControlName="selectedOptions" multiple>
+        <!-- Options from the new array -->
+        <mat-option *ngFor="let option of newOptions" [value]="option">{{ option }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit">Generate Briefing</button>
+</form>
+  
