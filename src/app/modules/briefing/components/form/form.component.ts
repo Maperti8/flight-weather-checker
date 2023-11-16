@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { OpmetService } from '../../services/opmet.service';
 
 @Component({
   selector: 'app-form',
@@ -7,12 +8,12 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-  stations: string[] = ['LZIB', 'LKPR'];
-  countries: string[] = ['KZ', 'EG', 'CZ'];
+  stations: string[] = ['LZIB', 'LKPR','EDDF','EGLL'];
+  countries: string[] = ['KZ', 'CZ','SQ','UR','ER'];
   reportTypes: string[] = ['METAR', 'TAF', 'SIGMET'];
   briefingForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private opmetService: OpmetService) {}
 
   ngOnInit() {
     this.briefingForm = this.fb.group({
@@ -50,6 +51,11 @@ export class FormComponent implements OnInit {
           },
         ],
       };
+
+      this.opmetService.generateBriefing(briefingObject)
+      .subscribe(response => {
+        console.log('Received response from server:', response);
+      });
 
       console.log('Generating Briefing...', briefingObject);
     }
