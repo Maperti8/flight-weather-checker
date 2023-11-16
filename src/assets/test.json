@@ -1,0 +1,16 @@
+{
+    "id": "my LZBB/CZ query",
+    "method": "query",
+    "params": [
+        {
+            "id": "LZBB",
+            "reportTypes": ["TAF_LONGTAF"],
+            "firs": ["LZBB"]
+        },
+        {
+            "id": "CZ",
+            "reportTypes": ["TAF_LONGTAF"],
+            "countries": ["CZ"]
+        }
+    ]
+}

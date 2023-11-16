@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-  airports: string[] = ['LZIB', 'LKPR'];
+  stations: string[] = ['LZIB', 'LKPR'];
   countries: string[] = ['KZ', 'EG', 'CZ'];
   reportTypes: string[] = ['METAR', 'TAF', 'SIGMET'];
   briefingForm!: FormGroup;
@@ -16,17 +16,42 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
     this.briefingForm = this.fb.group({
-      METAR: false,
-      SIGMET: false,
-      TAF: false,
-      selectedOptions: []   
+      selectedStations: [],
+      selectedCountries: [],
+      reportTypes: this.fb.group({
+        METAR: false,
+        SIGMET: false,
+        TAF: false,
+      }),
     });
+  }
+
+  getReportTypeControl(reportType: string) {
+    return (this.briefingForm.get('reportTypes') as FormGroup).get(reportType) as FormControl;
   }
 
   generateBriefing() {
     if (this.briefingForm.valid) {
       const formValue = this.briefingForm.value;
-      console.log('Generating Briefing...', formValue);
+
+      const selectedReportTypes = Object.keys(formValue.reportTypes)
+                                       .filter(type => formValue.reportTypes[type])
+                                       .map(type => type);
+
+      const briefingObject = {
+        id: 'query01',
+        method: 'query',
+        params: [
+          {
+            id: 'briefing01',
+            reportTypes: selectedReportTypes,
+            stations: formValue.selectedStations || [], 
+            countries: formValue.selectedCountries || [], 
+          },
+        ],
+      };
+
+      console.log('Generating Briefing...', briefingObject);
     }
   }
 }

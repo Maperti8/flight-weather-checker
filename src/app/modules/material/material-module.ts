@@ -9,6 +9,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatChipsModule} from '@angular/material/chips';
 // angular flex layout
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -23,6 +24,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatSelectModule,
     MatFormFieldModule,
     MatToolbarModule,
+    MatChipsModule,
   ],
   exports: [
     MatButtonModule,
@@ -34,6 +36,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatSelectModule,
     MatFormFieldModule,
     MatToolbarModule,
+    MatChipsModule,
   ]
 })
 export class MaterialModule {}
