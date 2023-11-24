@@ -11,6 +11,8 @@ export class FormComponent implements OnInit {
   stations: string[] = ['LZIB', 'LKPR','EDDF','EGLL'];
   countries: string[] = ['KZ', 'CZ','SQ','UR','ER'];
   reportTypes: string[] = ['METAR', 'TAF', 'SIGMET'];
+  resultArray: any[] = [];
+  transformedData: any;
   briefingForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private opmetService: OpmetService) {}
@@ -52,10 +54,35 @@ export class FormComponent implements OnInit {
         ],
       };
 
-      this.opmetService.generateBriefing(briefingObject)
-      .subscribe(response => {
-        console.log('Received response from server:', response);
-      });
+        this.opmetService.generateBriefing(briefingObject)
+          .subscribe(response => {    
+            this.resultArray = response.result || [];
+            // Assuming your resultArray is named resultArray
+              this.transformedData = this.resultArray.reduce((acc, item) => {
+                const airportCode = item.stationId;
+
+                if (!acc[airportCode]) {
+                  acc[airportCode] = {
+                    METAR: [],
+                    SIGMET: [],
+                    TAF: [],
+                  };
+                }
+
+                if (item.queryType === 'METAR') {
+                  acc[airportCode].METAR.push(item);
+                } else if (item.queryType === 'SIGMET') {
+                  acc[airportCode].SIGMET.push(item);
+                } else if (item.queryType === 'TAF') {
+                  acc[airportCode].TAF.push(item);
+                }
+
+                return acc;
+              }, {});
+
+            console.log(this.transformedData);
+
+          });
 
       console.log('Generating Briefing...', briefingObject);
     }
